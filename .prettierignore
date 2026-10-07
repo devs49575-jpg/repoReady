@@ -1,0 +1,7 @@
+node_modules
+dist
+coverage
+package-lock.json
+server/test/fixtures
+docs/BUILD_PLAN.md
+docs/ADDENDUM_01_PRIVATE_REPOS.md

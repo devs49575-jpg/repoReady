@@ -1,0 +1,23 @@
+@import 'tailwindcss';
+
+@theme {
+  /* One accent colour (indigo); red/amber/green are reserved for status. */
+  --color-accent-50: var(--color-indigo-50);
+  --color-accent-100: var(--color-indigo-100);
+  --color-accent-200: var(--color-indigo-200);
+  --color-accent-300: var(--color-indigo-300);
+  --color-accent-400: var(--color-indigo-400);
+  --color-accent-500: var(--color-indigo-500);
+  --color-accent-600: var(--color-indigo-600);
+  --color-accent-700: var(--color-indigo-700);
+  --color-accent-800: var(--color-indigo-800);
+  --color-accent-900: var(--color-indigo-900);
+}
+
+:root {
+  color-scheme: light dark;
+}
+
+body {
+  @apply bg-slate-50 text-slate-900 antialiased dark:bg-slate-950 dark:text-slate-100;
+}

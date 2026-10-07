@@ -1,0 +1,10 @@
+node_modules/
+dist/
+coverage/
+.env
+.env.local
+*.log
+.DS_Store
+
+# Test fixtures intentionally contain build output that analyzers must skip
+!server/test/fixtures/**/dist/

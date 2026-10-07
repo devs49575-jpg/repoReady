@@ -1,0 +1,27 @@
+# Render Blueprint for the RepoReady API (https://render.com/docs/blueprint-spec).
+# New > Blueprint > pick this repo. Render prompts for the `sync: false` values.
+services:
+  - type: web
+    name: repoready-api
+    runtime: docker
+    plan: free
+    dockerfilePath: ./Dockerfile
+    dockerContext: .
+    healthCheckPath: /api/health
+    autoDeployTrigger: checksPass # deploy only after CI passes
+    # Exactly one instance: private reports live in this process's memory.
+    numInstances: 1
+    envVars:
+      - key: NODE_ENV
+        value: production
+      - key: MONGODB_URI # MongoDB Atlas connection string
+        sync: false
+      - key: GITHUB_TOKEN # read-only token for public repos
+        sync: false
+      - key: CLIENT_ORIGIN # the Vercel URL, e.g. https://repoready.vercel.app
+        sync: false
+      # The free plan has 512 MB of RAM: keep the API and the madge worker well under it.
+      - key: NODE_OPTIONS
+        value: --max-old-space-size=200
+      - key: ARCHITECTURE_MAX_MEMORY_MB
+        value: '192'
