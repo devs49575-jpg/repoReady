@@ -14,6 +14,15 @@ describe('parseConfig', () => {
     expect(config.CLIENT_ORIGIN).toBe('http://localhost:5173');
   });
 
+  it('normalizes CLIENT_ORIGIN to a bare origin so CORS matches what browsers send', () => {
+    expect(
+      parseConfig({ ...valid, CLIENT_ORIGIN: 'https://repo-ready-chi.vercel.app/' }).CLIENT_ORIGIN,
+    ).toBe('https://repo-ready-chi.vercel.app');
+    expect(parseConfig({ ...valid, CLIENT_ORIGIN: 'https://example.com/app/' }).CLIENT_ORIGIN).toBe(
+      'https://example.com',
+    );
+  });
+
   it('coerces numeric strings', () => {
     expect(parseConfig({ ...valid, PORT: '5000' }).PORT).toBe(5000);
   });

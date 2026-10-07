@@ -15,7 +15,7 @@ out of the box; private ones work with a read-only token you supply.
 No AI runs inside the product: every result comes from deterministic parsing, static analysis and
 public APIs (GitHub, OSV.dev, the npm registry). Analyzed code is only read, never executed.
 
-**Demo:** _link added after deployment_ · **Status:** MVP complete; deployment next.
+**Live demo:** <https://repo-ready-chi.vercel.app> (API on Render's free tier: the first request after a quiet spell can take about a minute while it wakes up) · **Status:** MVP complete and deployed.
 
 ![Report for colinhacks/zod](docs/screenshots/report.png)
 

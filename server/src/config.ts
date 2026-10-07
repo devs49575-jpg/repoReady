@@ -9,7 +9,12 @@ const envSchema = z.object({
     .string({ error: 'MONGODB_URI is required' })
     .regex(/^mongodb(\+srv)?:\/\//, 'MONGODB_URI must start with mongodb:// or mongodb+srv://'),
   GITHUB_TOKEN: z.string({ error: 'GITHUB_TOKEN is required' }).min(1, 'GITHUB_TOKEN is required'),
-  CLIENT_ORIGIN: z.url().default('http://localhost:5173'),
+  // Normalized to a bare origin: browsers send `https://host` (no slash or path), and CORS compares
+  // exactly, so `https://host/` would silently block every request (seen on the first deploy).
+  CLIENT_ORIGIN: z
+    .url()
+    .default('http://localhost:5173')
+    .transform((value) => new URL(value).origin),
   MAX_REPO_SIZE_KB: z.coerce.number().int().positive().default(100_000),
   ANALYSIS_TIMEOUT_MS: z.coerce.number().int().positive().default(90_000),
   CACHE_TTL_HOURS: z.coerce.number().positive().default(24),
