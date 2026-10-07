@@ -65,6 +65,12 @@ Accessibility: axe-core (WCAG 2.1 AA + best practices) on home, home with the pr
 
 **Still to do (owner):** run `docker build -t repoready-server .` once Docker Desktop is running.
 
+## Production check (Phase 6)
+
+Live at https://repo-ready-chi.vercel.app (client on Vercel) with the API at https://repoready-api.onrender.com (Render free, MongoDB Atlas). Verified 2026-10-07: CORS allows exactly the Vercel origin; RepoReady analyzing its own GitHub repo (devs49575-jpg/repoReady) scores **99/100** in 37 s with every section ok; in Chrome on desktop (light) and a 375 px phone (dark) the shared report link and a fresh analysis from the home page (sindresorhus/ky, 80) work with no console errors and no horizontal scroll.
+
+Deployment issues found and fixed: CLIENT_ORIGIN was entered with a trailing slash, which blocks every browser request (the server now normalizes it to a bare origin); the redeploy then failed because Render's outbound IPs were not on the Atlas access list (fixed by adding Render's published outbound ranges, not 0.0.0.0/0).
+
 ## Real-developer sessions
 
 Still to do (Phase 2 asks for 3+ developers). Fill in the table at the top after each session.
